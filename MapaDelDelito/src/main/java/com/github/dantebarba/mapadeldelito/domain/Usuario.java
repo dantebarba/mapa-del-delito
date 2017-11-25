@@ -1,11 +1,16 @@
 package com.github.dantebarba.mapadeldelito.domain;
 
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import com.github.dantebarba.mapadeldelito.domain.generics.EntidadBase;
 
+@Entity
 public class Usuario extends EntidadBase {
 
+	@Id
+	private Long id;
+	
 	private String ip;
 	
 	/**
@@ -15,8 +20,28 @@ public class Usuario extends EntidadBase {
 	
 	
 	@Override
-	public Serializable getId() {
-		return null;
+	public Long getId() {
+		return this.id;
+	}
+
+
+	public String getHashMd5() {
+		return hashMd5;
+	}
+
+
+	public void setHashMd5(String hashMd5) {
+		this.hashMd5 = hashMd5;
+	}
+
+
+	public String getIp() {
+		return ip;
+	}
+
+
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 }
