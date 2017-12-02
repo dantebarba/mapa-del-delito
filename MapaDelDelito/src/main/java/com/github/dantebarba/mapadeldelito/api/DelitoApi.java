@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import com.github.dantebarba.mapadeldelito.controllers.DelitoController;
@@ -33,16 +34,15 @@ public class DelitoApi {
 	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String listarDelitos(@QueryParam("from") Integer from, @QueryParam("size") Integer size) {
-		return "Hello world!";
+	public Response listarDelitos(@QueryParam("from") Integer from, @QueryParam("size") Integer size) {
+		return Response.ok(delitoController.findAll(new PageRequest(from, size)).getContent()).build();
 	}
 
 	@GET
 	@Path("/{hashmd5}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String recuperarDelito(@PathParam("hashmd5") String hashmd5) {
-		return hashmd5;
-
+	public Response recuperarDelito(@PathParam("hashmd5") String hashmd5) {
+		return Response.ok(delitoController.find(hashmd5)).build();
 	}
 
 	@POST
@@ -50,9 +50,7 @@ public class DelitoApi {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response crearRobo(@Context HttpServletRequest req, Robo unRobo) {
-		this.create(unRobo, req.getRemoteAddr());
-		return Response.ok().build();
-
+		return Response.ok(this.create(unRobo, req.getRemoteAddr())).build();
 	}
 
 	@POST
@@ -60,8 +58,7 @@ public class DelitoApi {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response crearSecuestro(@Context HttpServletRequest req, Secuestro unSecuestro) {
-		this.create(unSecuestro, req.getRemoteAddr());
-		return Response.ok().build();
+		return Response.ok(this.create(unSecuestro, req.getRemoteAddr())).build();
 
 	}
 
@@ -70,9 +67,7 @@ public class DelitoApi {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response crearActitudSospechosa(@Context HttpServletRequest req, ActitudSospechosa unaActitudSospechosa) {
-		this.create(unaActitudSospechosa, req.getRemoteAddr());
-		return Response.ok().build();
-
+		return Response.ok(this.create(unaActitudSospechosa, req.getRemoteAddr())).build();
 	}
 
 	@POST
@@ -80,17 +75,17 @@ public class DelitoApi {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response crearMerodeo(@Context HttpServletRequest req, Merodeo unMerodeo) {
-		this.create(unMerodeo, req.getRemoteAddr());
-		return Response.ok().build();
+		return Response.ok(this.create(unMerodeo, req.getRemoteAddr())).build();
 	}
 
-	public void create(Delito unDelito, String ipAddr) {
-		delitoController.create(unDelito, ipAddr);
+	public Delito create(Delito unDelito, String ipAddr) {
+		return delitoController.create(unDelito, ipAddr);
 	}
 
 	@DELETE
 	@Path("/{hashmd5}")
-	public Response borrarDelito(@PathParam("hashmd5") Long idDelito) {
-		return null;
+	public Response borrarDelito(@PathParam("hashmd5") String hashmd5) {
+		delitoController.delete(hashmd5);
+		return Response.ok("ok").build();
 	}
 }

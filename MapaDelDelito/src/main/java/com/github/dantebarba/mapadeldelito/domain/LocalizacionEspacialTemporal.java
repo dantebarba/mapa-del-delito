@@ -3,6 +3,7 @@ package com.github.dantebarba.mapadeldelito.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,8 +21,8 @@ public class LocalizacionEspacialTemporal extends EntidadBase {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date hasta;
 
-	@OneToOne
-	private Geolocalizacion coordeanadas;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Geolocalizacion coordenadas;
 
 	@Id
 	@GeneratedValue
@@ -30,6 +31,30 @@ public class LocalizacionEspacialTemporal extends EntidadBase {
 	@Override
 	public Long getId() {
 		return this.id;
+	}
+
+	public Date getDe() {
+		return de;
+	}
+
+	public void setDe(Date de) {
+		this.de = de;
+	}
+
+	public Date getHasta() {
+		return hasta;
+	}
+
+	public void setHasta(Date hasta) {
+		this.hasta = hasta;
+	}
+
+	public Geolocalizacion getCoordenadas() {
+		return coordenadas;
+	}
+
+	public void setCoordenadas(Geolocalizacion coordeanadas) {
+		this.coordenadas = coordeanadas;
 	}
 
 }

@@ -36,4 +36,36 @@ public class AccionPolicial extends EntidadBase {
 	public Long getId() {
 		return this.id;
 	}
+
+	public boolean isPresenciaPolicial() {
+		return presenciaPolicial;
+	}
+
+	public void setPresenciaPolicial(boolean presenciaPolicial) {
+		this.presenciaPolicial = presenciaPolicial;
+	}
+
+	public Atencion911 getAtencion911() {
+		return atencion911;
+	}
+
+	public void setAtencion911(Atencion911 atencion911) {
+		this.atencion911 = atencion911;
+	}
+
+	public Integer getMinutosDeDemora() {
+		return minutosDeDemora;
+	}
+
+	public void setMinutosDeDemora(Integer minutosDeDemora) {
+		this.minutosDeDemora = minutosDeDemora;
+	}
+
+	public Resolucion getResolucionPolicial() {
+		return resolucionPolicial;
+	}
+
+	public void setResolucionPolicial(Resolucion resolucionPolicial) {
+		this.resolucionPolicial = resolucionPolicial;
+	}
 }

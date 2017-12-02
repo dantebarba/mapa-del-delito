@@ -2,6 +2,7 @@ package com.github.dantebarba.mapadeldelito.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -32,7 +33,7 @@ public abstract class Delito extends EntidadBase {
 	
 	private String descripcion;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private LocalizacionEspacialTemporal localizacion;
 	
 	private Integer cantidadDelincuentes;
@@ -41,10 +42,10 @@ public abstract class Delito extends EntidadBase {
 	
 	private boolean hechoConsumado = true;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Movilidad movilidad;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Usuario denunciante;
 	
 	/**
@@ -52,8 +53,9 @@ public abstract class Delito extends EntidadBase {
 	 */
 	private String hashMd5;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private AccionPolicial accionPolicial;
+	
 	@Enumerated(EnumType.STRING)
 	private ViolenciaEjercida violenciaEjercida = ViolenciaEjercida.SIN_DETERMINAR;
 	
@@ -136,6 +138,30 @@ public abstract class Delito extends EntidadBase {
 
 	public void setFechaDenuncia(Date fechaDenuncia) {
 		this.fechaDenuncia = fechaDenuncia;
+	}
+
+	public Movilidad getMovilidad() {
+		return movilidad;
+	}
+
+	public void setMovilidad(Movilidad movilidad) {
+		this.movilidad = movilidad;
+	}
+
+	public LocalizacionEspacialTemporal getLocalizacion() {
+		return localizacion;
+	}
+
+	public void setLocalizacion(LocalizacionEspacialTemporal localizacion) {
+		this.localizacion = localizacion;
+	}
+
+	public AccionPolicial getAccionPolicial() {
+		return accionPolicial;
+	}
+
+	public void setAccionPolicial(AccionPolicial accionPolicial) {
+		this.accionPolicial = accionPolicial;
 	}
 
 	

@@ -1,6 +1,7 @@
 package com.github.dantebarba.mapadeldelito.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import com.github.dantebarba.mapadeldelito.domain.generics.EntidadBase;
@@ -9,6 +10,7 @@ import com.github.dantebarba.mapadeldelito.domain.generics.EntidadBase;
 public class Usuario extends EntidadBase {
 
 	@Id
+	@GeneratedValue
 	private Long id;
 	
 	private String ip;

@@ -1,6 +1,7 @@
 package com.github.dantebarba.mapadeldelito.controllers;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 import javax.ws.rs.WebApplicationException;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import com.github.dantebarba.mapadeldelito.domain.Delito;
@@ -23,10 +25,12 @@ public class DelitoController {
 	@Autowired
 	DelitoRepository repo;
 
-	public void create(Delito unDelito, String ipAddr) {
+	@Transactional
+	public Delito create(Delito unDelito, String ipAddr) {
 		unDelito.setDenunciante(usuarioController.generarUsuario(ipAddr));
+		unDelito.setFechaDenuncia(new Date());
 		genMd5(unDelito);
-		repo.save(unDelito);
+		return repo.save(unDelito);
 	}
 
 	private void genMd5(Delito unDelito) {
@@ -37,14 +41,20 @@ public class DelitoController {
 		}
 	}
 
+	@Transactional(readOnly = true)
 	public Delito find(String md5hash) {
-		return repo.findByHashMd5(md5hash);
+		Delito unDelito = repo.findByHashMd5(md5hash);
+		if (unDelito == null)
+			throw new WebApplicationException("No se ha encontrado el delito con identificacion " + md5hash, 404);
+		return unDelito;
 	}
 
+	@Transactional(readOnly = true)
 	public Page<Delito> findAll(PageRequest page) {
 		return repo.findAll(page);
 	}
 
+	@Transactional
 	public void delete(String md5Hash) {
 		Delito delito = repo.findByHashMd5(md5Hash);
 

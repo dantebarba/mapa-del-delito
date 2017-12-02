@@ -27,4 +27,28 @@ public class Movilidad extends EntidadBase {
 	public Long getId() {
 		return this.id;
 	}
+
+	public String getPatente() {
+		return patente;
+	}
+
+	public void setPatente(String patente) {
+		this.patente = patente;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public TipoVehiculo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoVehiculo tipo) {
+		this.tipo = tipo;
+	}
 }

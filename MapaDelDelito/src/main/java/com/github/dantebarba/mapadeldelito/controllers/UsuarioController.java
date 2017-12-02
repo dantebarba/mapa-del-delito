@@ -6,6 +6,7 @@ import javax.ws.rs.WebApplicationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.dantebarba.mapadeldelito.domain.Usuario;
 import com.github.dantebarba.mapadeldelito.repositories.UsuarioRepository;
@@ -17,7 +18,7 @@ public class UsuarioController {
 	@Autowired
 	UsuarioRepository repo;
 	
-
+	@Transactional
 	public Usuario generarUsuario(String ipAddr) {
 		 String hashMd5;
 		try {
