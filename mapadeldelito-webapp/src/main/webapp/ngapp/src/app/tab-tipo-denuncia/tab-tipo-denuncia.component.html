@@ -1,19 +1,17 @@
-<form>
-<div class="section">
-<!-- Dropdown Trigger -->
-<a class='dropdown-button btn' href='#' data-activates='tipo-denuncia'>Qué ocurrió</a>
+<form #tabTipoDenunciaDenunciaForm="ngForm">
+  <div class="form-group">
+    <!-- Dropdown Trigger -->
+    <div>
+      <select [(ngModel)]="tipoSeleccionado" (ngModelChange)="onTipoChange($event)" name="tipoSeleccionado" class="form-control">
+        <option *ngFor="let tipo of tipoDelito" ngValue="{{tipo}}">{{tipo}}</option>
+      </select>
+    </div>
+  </div>
 
-<ul id='tipo-denuncia' class='dropdown-content'>
-  <li *ngFor="let tipo of getTiposDelito()" ><a (click)="seleccionarTipo(tipo)">{{ tipo }}</a></li>
-</ul>
-</div>
-<div class="divider"></div>
-<div class="section">
-<!-- Dropdown Trigger -->
-<a class='dropdown-button btn' href='#' data-activates='modalidad'>Modalidad</a>
-
-<ul id='modalidad' class='dropdown-content'>
-  <li *ngFor="let modalidad of modalidades"><a (click)="seleccionarModalidad(modalidad)">{{ modalidad }}</a></li>
-</ul>
-</div>
+  <div class="form-group">
+    <!-- Dropdown Trigger -->
+    <select [(ngModel)]="modalidadSeleccionada" name="modalidadSeleccionada" class="form-control">
+      <option *ngFor="let modalidad of modalidades" ngValue="{{modalidad}}">{{modalidad}}</option>
+    </select>
+  </div>
 </form>

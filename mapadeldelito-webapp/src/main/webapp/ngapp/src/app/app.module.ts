@@ -5,7 +5,7 @@ import { UIRouterModule } from "@uirouter/angular";
 import { appStates }  from "./app.states";
 
 import { DelitoService } from "./delito.service";
-
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
 import { TabDenunciaComponent } from './tab-denuncia/tab-denuncia.component';
@@ -14,6 +14,7 @@ import { TabLocalizacionDenunciaComponent } from './tab-localizacion-denuncia/ta
 import { TabMovilidadComponent } from './tab-movilidad/tab-movilidad.component';
 import { AppStartComponent } from './app-start/app-start.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -23,11 +24,13 @@ import { HttpClientModule } from '@angular/common/http';
     TabTipoDenunciaComponent,
     TabLocalizacionDenunciaComponent,
     TabMovilidadComponent,
-    AppStartComponent
+    AppStartComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     UIRouterModule.forRoot({
       states: appStates,
       useHash: true,
