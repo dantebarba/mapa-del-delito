@@ -1,0 +1,19 @@
+<form>
+<div class="section">
+<!-- Dropdown Trigger -->
+<a class='dropdown-button btn' href='#' data-activates='tipo-denuncia'>Qué ocurrió</a>
+
+<ul id='tipo-denuncia' class='dropdown-content'>
+  <li *ngFor="let tipo of getTiposDelito()" ><a (click)="seleccionarTipo(tipo)">{{ tipo }}</a></li>
+</ul>
+</div>
+<div class="divider"></div>
+<div class="section">
+<!-- Dropdown Trigger -->
+<a class='dropdown-button btn' href='#' data-activates='modalidad'>Modalidad</a>
+
+<ul id='modalidad' class='dropdown-content'>
+  <li *ngFor="let modalidad of modalidades"><a (click)="seleccionarModalidad(modalidad)">{{ modalidad }}</a></li>
+</ul>
+</div>
+</form>

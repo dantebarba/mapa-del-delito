@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { DelitoServiceService } from './delito-service.service';
+import { DelitoService } from './delito.service';
 
 describe('DelitoServiceService', () => {
   beforeEach(() => {
